@@ -3,22 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Drumkit Cellular Automata</title>
+    <title>Blog</title>
     <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet" />
 </head>
 <body>
-    <h1>Drumkit Cellular Automata</h1>
+    <h1>Cellular Automata Blog</h1>
 
-    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <p>Concepts from class: program synthesis and cellular automata</p>
+    <br>
+    <p>Code techniques from class: using gain nodes to avoid clipping and clicks</p>
+    <br>
+    <p>Use of topic not covered in class: chord progressions</p>
     <br>
     <br>
-    <button id="startStopButton">Start</button>
-    <br>
-    <br>
-    <a href="{{ url_for('blog')}}">Click here for blog</a> 
-    <br>
-    <br>
-    <a href="{{ url_for('test')}}">Click here for test</a>
+    <a href="{{ url_for('index')}}">Go back</a>
 </body>
 
 <script src="{{ url_for('static', filename='js/main.js')}}"></script>
