@@ -143,7 +143,7 @@ function playKickDrum(time) {
   gainNode2.gain.setValueAtTime(1, time);
   gainNode2.gain.exponentialRampToValueAtTime(0.001, time + 0.5);  
 
-  
+
   // connections
   osc.connect(gainNode);
   osc2.connect(gainNode2);
@@ -254,7 +254,7 @@ function createNoise() {
 
 
 // choose drum sounds to overlay kick drum
-function chooseRhythm() {
+function chooseRhythm(time) {
 
   // choose rhythm based on alive cells
   alive = countAliveCells(grid);
@@ -262,44 +262,41 @@ function chooseRhythm() {
   ratio = alive / totalCells;
 
   if (ratio < 0.1) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playHiHat(time);
+    playHiHat(time + 0.2);
   }
   else if (ratio < 0.2) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playHiHat(time + 0.2);
+    playSnare(time + 0.4);
   }
   else if (ratio < 0.3) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playSnare(time);
+    playHiHat(time + 0.2);
   }
   else if (ratio < 0.4) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playHiHat(time + 0.2);
   }
   else if (ratio < 0.5) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playSnare(time);
+    playSnare(time + 0.2);
   }
   else if (ratio < 0.6) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playHiHat(time + 0.2);
+    playHiHat(time + 0.4);
   }
   else if (ratio < 0.7) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playSnare(time);
+    playSnare(time + 0.4);
   }
   else if (ratio < 0.8) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playHiHat(time);
+    playSnare(time + 0.2);
   }
   else if (ratio < 0.9) {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playSnare(time + 0.2);
   }
   else {
-    playHiHat(audioCtx.currentTime);
-    playHiHat(audioCtx.currentTime + 0.2);
+    playHiHat(time + 0.2);
   }
 
 }
@@ -324,13 +321,23 @@ function draw() {
   updateGrid();
   drawGrid();
 
-  playKickDrum();
-  chooseRhythm();
+  playKickDrum(audioCtx.currentTime);
+  chooseRhythm(audioCtx.currentTime);
 
-  // TODO: add slider to change speed
-  setTimeout(draw, 5000 / FPS); // change speed of automaton updates
-
+  // speed of automaton updates
+  let setSpeed = 11000 - updateSpeed.value
+  setTimeout(draw, setSpeed / FPS); 
 }
 
 // button to trigger automaton
 startStopButton.addEventListener('click', toggleAutomaton);
+
+
+// grid speed updated by slider
+let updateSpeed = document.getElementById("updateSpeed");
+let showFPS = document.getElementById("showFPS");
+showFPS.innerHTML = updateSpeed.value;
+
+updateSpeed.oninput = function() {
+  showFPS.innerHTML = this.value;
+}
