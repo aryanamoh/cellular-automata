@@ -1,12 +1,12 @@
 # Cellular Automata
 
 ## Setup
-- pip and python3 are required to run this project
+- Required: pip and python3
 - Activate virtual environment (on Mac) with: 
 
     `. .venv/bin/activate`
 
-- Download requirements with: 
+- Download app requirements with: 
 
     `pip install -r requirements.txt`
 
@@ -16,4 +16,6 @@
 Aryana Mohammadi (am5723@barnard.edu)
 
 ### Credits
-- Fonts imported from [Glitch](https://glitch.com)# cellular-automata
+- Fonts imported from [Glitch](https://glitch.com)
+- Drum sounds synthesis modeled after code by [Chris Lowis](https://dev.opera.com/articles/drum-sounds-webaudio/)
+- Hi-Hat sounds modeled after code by [Joe Sullivan](http://joesul.li/van/synthesizing-hi-hats/)
