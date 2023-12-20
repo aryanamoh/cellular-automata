@@ -9,6 +9,10 @@
 - Download app requirements with: 
 
     `pip install -r requirements.txt`
+  
+- Run with:
+
+  `python3 app.py`
 
 ## About
 
