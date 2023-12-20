@@ -10,6 +10,14 @@ let gainNode;
 let isRunning = false;
 let grid = createGrid();
 const FPS = 10;
+let colors = ["#E6E6FA", "#D8BFD8", "#DDA0DD", "#EE82EE", "#DA70D6", "#FF00FF", "#BA55D3", "#9932CC", "#800080", "#9370DB", "#8A2BE2", "#9400D3", "#8B008B", "#4B0082", "#6A5ACD"];
+let liveCellRatio = 50;
+
+// Function to get a random color from the colors array
+function getRandomColor() {
+  const randomIndex = Math.floor(Math.random() * colors.length);
+  return colors[randomIndex];
+}
 
 // create a 2D array to represent the grid
 function createGrid() {
@@ -28,6 +36,8 @@ function drawGrid() {
       const y = j * resolution;
 
       if (grid[i][j] === 1) {
+        let color = getRandomColor();
+        ctx.fillStyle = color;
         ctx.fillRect(x, y, resolution, resolution);
       }
     }
@@ -257,43 +267,90 @@ function createNoise() {
 function chooseRhythm(time) {
 
   // choose rhythm based on alive cells
-  alive = countAliveCells(grid);
-  totalCells = rows * cols;
-  ratio = alive / totalCells;
+  let alive = countAliveCells(grid);
+  let totalCells = rows * cols;
+  liveCellRatio = alive / totalCells;
+  showLives.innerHTML = Math.round(liveCellRatio * 100);
 
-  if (ratio < 0.1) {
+  if (liveCellRatio == 0) {
+    playKickDrum(time);
+  }
+  else if (liveCellRatio < 0.05) {
     playHiHat(time);
     playHiHat(time + 0.2);
   }
-  else if (ratio < 0.2) {
+  else if (liveCellRatio < 0.1) {
     playHiHat(time + 0.2);
     playSnare(time + 0.4);
   }
-  else if (ratio < 0.3) {
+  else if (liveCellRatio < 0.15) {
     playSnare(time);
     playHiHat(time + 0.2);
   }
-  else if (ratio < 0.4) {
+  else if (liveCellRatio < 0.2) {
     playHiHat(time + 0.2);
   }
-  else if (ratio < 0.5) {
+  else if (liveCellRatio < 0.25) {
     playSnare(time);
     playSnare(time + 0.2);
+    playHiHat(time + 0.4);
   }
-  else if (ratio < 0.6) {
+  else if (liveCellRatio < 0.3) {
     playHiHat(time + 0.2);
     playHiHat(time + 0.4);
   }
-  else if (ratio < 0.7) {
+  else if (liveCellRatio < 0.35) {
     playSnare(time);
     playSnare(time + 0.4);
   }
-  else if (ratio < 0.8) {
+  else if (liveCellRatio < 0.4) {
     playHiHat(time);
     playSnare(time + 0.2);
   }
-  else if (ratio < 0.9) {
+  else if (liveCellRatio < 0.45) {
     playSnare(time + 0.2);
+  }
+  else if (liveCellRatio < 0.5) {
+    playHiHat(time);
+    playHiHat(time + 0.2);
+  }
+  else if (liveCellRatio < 0.55) {
+    playHiHat(time + 0.2);
+    playSnare(time + 0.4);
+  }
+  else if (liveCellRatio < 0.6) {
+    playSnare(time);
+    playHiHat(time + 0.1);
+  }
+  else if (liveCellRatio < 0.65) {
+    playHiHat(time + 0.2);
+  }
+  else if (liveCellRatio < 0.7) {
+    playSnare(time);
+    playSnare(time + 0.2);
+    playHiHat(time + 0.4);
+  }
+  else if (liveCellRatio < 0.75) {
+    playHiHat(time + 0.2);
+    playHiHat(time + 0.4);
+  }
+  else if (liveCellRatio < 0.8) {
+    playSnare(time);
+    playSnare(time + 0.1);
+    playHiHat(time + 0.2);
+    playSnare(time + 0.3);
+  }
+  else if (liveCellRatio < 0.85) {
+    playHiHat(time);
+    playSnare(time + 0.2);
+  }
+  else if (liveCellRatio < 0.9) {
+    playSnare(time + 0.2);
+  }
+  else if (liveCellRatio < 0.95) {
+    playHiHat(time);
+    playHiHat(time + 0.1);
+    playHiHat(time + 0.2);
   }
   else {
     playHiHat(time + 0.2);
@@ -341,3 +398,7 @@ showFPS.innerHTML = updateSpeed.value;
 updateSpeed.oninput = function() {
   showFPS.innerHTML = this.value;
 }
+
+
+// show percentage of live cells
+let showLives = document.getElementById("showLiveCells");
