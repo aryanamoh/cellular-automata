@@ -14,6 +14,9 @@
 
   `python3 app.py`
 
+- Navigate to `http://localhost:5723/`
+
+  
 ## About
 
 ### Author
