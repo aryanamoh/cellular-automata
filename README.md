@@ -1,5 +1,9 @@
 # Cellular Automata
 
+## Demo
+- Hosted on: [PythonAnywhere.com](https://aryanamoh.pythonanywhere.com/)
+- Video demo at:  [YouTube.com](https://youtu.be/nCwCHJzkWTY)
+
 ## Setup
 - Required: pip and python3
 - Activate virtual environment (on Mac) with: 
